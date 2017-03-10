@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<h1>CADASTRO DE PRODUTOS</h1>
+
+	<h:form id="form">
+		<p:panel id="toggleable" header="Toggleable" toggleable="true"
+			closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel"
+			style="margin-bottom:20px">
+			<p:panelGrid columns="2">
+				<h:outputLabel for="desc" value="Descrição do produto: " />
+				<h:inputText id="desc" value="#{produtoBean.produto.descricao}" />
+
+				<h:outputLabel for="preco" value="Preço: " />
+				<p:inputText id="preco" value="#{produtoBean.produto.preco}" />
+				<h:button value="Botão JSF"/>
+				<p:commandButton value="Salvar"
+					action="#{produtoBean.salvaProduto()}" update="form"/>
+
+			</p:panelGrid>
+
+		</p:panel>
+
+
+
+	</h:form>
+</h:body>
+</html>

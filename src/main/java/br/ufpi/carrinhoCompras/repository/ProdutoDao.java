@@ -1,5 +1,6 @@
 package br.ufpi.carrinhoCompras.repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -10,8 +11,11 @@ import javax.persistence.Query;
 import br.ufpi.carrinhoCompras.model.Produto;
 
 @Stateless
-public class ProdutoDao {
+public class ProdutoDao implements Serializable{
 
+		
+	private static final long serialVersionUID = 1L;
+	
 	@PersistenceContext
 	private EntityManager em;
 	
