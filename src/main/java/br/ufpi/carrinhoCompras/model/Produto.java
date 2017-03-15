@@ -1,11 +1,15 @@
 package br.ufpi.carrinhoCompras.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.ufpi.carrinhoCompras.listeners.ProdutoListener;
+
 @Entity
+@EntityListeners(ProdutoListener.class)
 public class Produto {
 	
 	@Id
@@ -15,6 +19,8 @@ public class Produto {
 	private String descricao;
 	
 	private Double preco;
+	
+	private String tipo;
 	
 	public Produto() {
 	}
@@ -42,6 +48,15 @@ public class Produto {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 	
 	
 }

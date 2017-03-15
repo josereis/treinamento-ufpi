@@ -12,24 +12,59 @@
 	<h1>CADASTRO DE PRODUTOS</h1>
 
 	<h:form id="form">
+
+		<p:growl id="messages" showDetail="true" sticky="true" />
+
 		<p:panel id="toggleable" header="Toggleable" toggleable="true"
 			closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel"
 			style="margin-bottom:20px">
-			<p:panelGrid columns="2">
-				<h:outputLabel for="desc" value="Descrição do produto: " />
-				<h:inputText id="desc" value="#{produtoBean.produto.descricao}" />
+			<h:panelGrid columns="2">
+				<h:outputLabel for="desc" value="#{msg['campo.descricao']}:"/>
+				<p:inputText id="desc" value="#{produtoBean.produto.descricao}"  required="true" requiredMessage="Campo descrição deve ser preenchido!"/>
 
-				<h:outputLabel for="preco" value="Preço: " />
-				<p:inputText id="preco" value="#{produtoBean.produto.preco}" />
-				<h:button value="Botão JSF"/>
+				<p:outputLabel for="preco" value="Preço: " />
+				<p:inputText id="preco" value="#{produtoBean.produto.preco}" required="true"/>
+
+				<p:outputLabel for="tipo" value="Tipo do Produto"/>
+				
+				<p:selectOneMenu id="tipo" value="#{produtoBean.produto.tipo}"
+					style="width:125px" required="true">
+					<f:selectItem itemLabel="Selecione um tipo" itemValue="" />
+					<f:selectItem itemLabel="Tipo 1" itemValue="tipo1" />
+					<f:selectItem itemLabel="Tipo 2" itemValue="tipo2" />
+					<f:selectItem itemLabel="Tipo 3" itemValue="tipo3" />
+				</p:selectOneMenu>
+
 				<p:commandButton value="Salvar"
-					action="#{produtoBean.salvaProduto()}" update="form"/>
+					action="#{produtoBean.salvaProduto()}"
+					update="@form :#{p:component('table')}" />
 
-			</p:panelGrid>
+			</h:panelGrid>
 
 		</p:panel>
 
+		<p:spacer />
 
+		<p:dataTable id="table" var="produto"
+			value="#{produtoBean.listarProdutos()}">
+			<p:column headerText="Id">
+				<h:outputText value="#{produto.id}" />
+			</p:column>
+
+			<p:column headerText="Descrição">
+				<h:outputText value="#{produto.descricao}" />
+			</p:column>
+
+			<p:column headerText="Tipo">
+				<h:outputText value="#{produto.tipo}" />
+			</p:column>
+
+			<p:column headerText="Preço">
+				<h:outputText value="#{produto.preco}" >
+					<f:convertNumber pattern="R$ #,##0.00"/>
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
 
 	</h:form>
 </h:body>

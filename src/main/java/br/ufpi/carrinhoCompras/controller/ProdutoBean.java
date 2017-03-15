@@ -3,6 +3,8 @@
  */
 package br.ufpi.carrinhoCompras.controller;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -35,6 +37,10 @@ public class ProdutoBean {
 	public void salvaProduto(){
 		produtoDao.salvar(produto);
 		produto = new Produto();
+	}
+	
+	public List<Produto> listarProdutos(){
+		return produtoDao.listar();
 	}
 
 	public Produto getProduto() {
