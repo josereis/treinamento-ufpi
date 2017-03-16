@@ -1,71 +1,78 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="template.xhtml">
 
-<h:head>
-</h:head>
+	<ui:define name="centro">
 
-<h:body>
-	<h1>CADASTRO DE PRODUTOS</h1>
+		<h1>CADASTRO DE PRODUTOS</h1>
 
-	<h:form id="form">
+		<h:form id="form">
 
-		<p:growl id="messages" showDetail="true" sticky="true" />
+			<p:growl id="messages" showDetail="true" sticky="true" />
 
-		<p:panel id="toggleable" header="Toggleable" toggleable="true"
-			closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel"
-			style="margin-bottom:20px">
-			<h:panelGrid columns="2">
-				<h:outputLabel for="desc" value="#{msg['campo.descricao']}:"/>
-				<p:inputText id="desc" value="#{produtoBean.produto.descricao}"  required="true" requiredMessage="Campo descrição deve ser preenchido!"/>
+			<p:panel id="toggleable" header="Toggleable" toggleable="true"
+				closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel"
+				style="margin-bottom:20px">
+				<h:panelGrid columns="2">
+					<h:outputLabel for="desc" value="#{msg['campo.descricao']}:" />
+					<p:inputText id="desc" value="#{produtoBean.produto.descricao}"
+						required="true"
+						requiredMessage="Campo descrição deve ser preenchido!" />
 
-				<p:outputLabel for="preco" value="Preço: " />
-				<p:inputText id="preco" value="#{produtoBean.produto.preco}" required="true"/>
+					<p:outputLabel for="preco" value="Preço: " />
+					<p:inputText id="preco" value="#{produtoBean.produto.preco}"
+						required="true" />
 
-				<p:outputLabel for="tipo" value="Tipo do Produto"/>
-				
-				<p:selectOneMenu id="tipo" value="#{produtoBean.produto.tipo}"
-					style="width:125px" required="true">
-					<f:selectItem itemLabel="Selecione um tipo" itemValue="" />
-					<f:selectItem itemLabel="Tipo 1" itemValue="tipo1" />
-					<f:selectItem itemLabel="Tipo 2" itemValue="tipo2" />
-					<f:selectItem itemLabel="Tipo 3" itemValue="tipo3" />
-				</p:selectOneMenu>
+					<p:outputLabel for="tipo" value="Tipo do Produto" />
 
-				<p:commandButton value="Salvar"
-					action="#{produtoBean.salvaProduto()}"
-					update="@form :#{p:component('table')}" />
+					<p:selectOneMenu id="tipo" value="#{produtoBean.produto.tipo}"
+						style="width:125px" required="true">
+						<f:selectItem itemLabel="Selecione um tipo" itemValue="" />
+						<f:selectItem itemLabel="Tipo 1" itemValue="tipo1" />
+						<f:selectItem itemLabel="Tipo 2" itemValue="tipo2" />
+						<f:selectItem itemLabel="Tipo 3" itemValue="tipo3" />
+					</p:selectOneMenu>
 
-			</h:panelGrid>
+					<p:commandButton value="Salvar"
+						action="#{produtoBean.salvaProduto()}"
+						update="@form :#{p:component('table')}" />
 
-		</p:panel>
+					<p:commandButton value="Download" ajax="false" immediate="true"
+						icon="ui-icon-arrowthick-1-s">
+						<p:fileDownload value="#{produtoBean.downloadRelatorio()}" />
+					</p:commandButton>
 
-		<p:spacer />
+				</h:panelGrid>
 
-		<p:dataTable id="table" var="produto"
-			value="#{produtoBean.listarProdutos()}">
-			<p:column headerText="Id">
-				<h:outputText value="#{produto.id}" />
-			</p:column>
+			</p:panel>
 
-			<p:column headerText="Descrição">
-				<h:outputText value="#{produto.descricao}" />
-			</p:column>
+			<p:spacer />
 
-			<p:column headerText="Tipo">
-				<h:outputText value="#{produto.tipo}" />
-			</p:column>
+			<p:dataTable id="table" var="produto"
+				value="#{produtoBean.listarProdutos()}">
+				<p:column headerText="Id">
+					<h:outputText value="#{produto.id}" />
+				</p:column>
 
-			<p:column headerText="Preço">
-				<h:outputText value="#{produto.preco}" >
-					<f:convertNumber pattern="R$ #,##0.00"/>
-				</h:outputText>
-			</p:column>
-		</p:dataTable>
+				<p:column headerText="Descrição">
+					<h:outputText value="#{produto.descricao}" />
+				</p:column>
 
-	</h:form>
-</h:body>
-</html>
+				<p:column headerText="Tipo">
+					<h:outputText value="#{produto.tipo}" />
+				</p:column>
+
+				<p:column headerText="Preço">
+					<h:outputText value="#{produto.preco}">
+						<f:convertNumber pattern="R$ #,##0.00" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
