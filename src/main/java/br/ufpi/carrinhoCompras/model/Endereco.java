@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 public class Endereco {
 	private String bairro;
 	private String logradouro;
-	private int numero;
+	private Integer numero;
 	
 	public Endereco() {
 	}
@@ -23,10 +23,10 @@ public class Endereco {
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 	

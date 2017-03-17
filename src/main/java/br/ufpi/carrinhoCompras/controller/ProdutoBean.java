@@ -3,6 +3,7 @@
  */
 package br.ufpi.carrinhoCompras.controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -67,7 +68,7 @@ public class ProdutoBean {
 		this.produto = produto;
 	}
 
-	public void gerarRelatorio() {
+	public byte[] gerarRelatorio() {
 		List<Produto> produtos = produtoDao.listar();
 		JRDataSource datasource = new JRBeanCollectionDataSource(produtos);
 
@@ -82,23 +83,21 @@ public class ProdutoBean {
 			
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, datasource);
 			
-			JasperExportManager.exportReportToPdfFile(jasperPrint, tmp + "RelatorioProdutos.pdf");
+			return JasperExportManager.exportReportToPdf(jasperPrint);
 
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
+			return null;
 		}
 	}
 	
 	public StreamedContent downloadRelatorio(){
 		try {
-			gerarRelatorio();
-			String path = System.getProperty("java.io.tmpdir")+System.getProperty("file.separator")+"RelatorioProdutos.pdf";
+			byte[] contentReport =  gerarRelatorio();
 			
-			File file = new File(path);
-			
-			InputStream is = new FileInputStream(file);
+			InputStream is = new ByteArrayInputStream(contentReport);
 			
 						
 			return new DefaultStreamedContent(is, "application/pdf", "RelatorioProdutos.pdf");

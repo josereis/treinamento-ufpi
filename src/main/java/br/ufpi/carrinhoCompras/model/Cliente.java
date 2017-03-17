@@ -18,7 +18,11 @@ public class Cliente {
 	
 	private String nome;
 	
-	private Long cpf;
+	private String cpf;
+	
+	private String senha;
+	
+	private String email;
 	
 	@OneToMany(mappedBy="cliente")
 	private List<Compra> compras;
@@ -45,11 +49,11 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public Long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -60,6 +64,31 @@ public class Cliente {
 	public void setCompras(List<Compra> compras) {
 		this.compras = compras;
 	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 	
 	
 }

@@ -6,7 +6,7 @@
 
 	<ui:define name="centro">
 
-		<h1>CADASTRO DE PRODUTOS</h1>
+		<h1>#{msg['leg.cadastro.produtos']}</h1>
 
 		<h:form id="form">
 
@@ -19,27 +19,27 @@
 					<h:outputLabel for="desc" value="#{msg['campo.descricao']}:" />
 					<p:inputText id="desc" value="#{produtoBean.produto.descricao}"
 						required="true"
-						requiredMessage="Campo descrição deve ser preenchido!" />
+						requiredMessage="#{msg['warning.descricao']}" />
 
-					<p:outputLabel for="preco" value="Preço: " />
+					<p:outputLabel for="preco" value="#{msg['campo.preco']}:" />
 					<p:inputText id="preco" value="#{produtoBean.produto.preco}"
 						required="true" />
 
-					<p:outputLabel for="tipo" value="Tipo do Produto" />
+					<p:outputLabel for="tipo" value="#{msg['leg.tipo.produto']}" />
 
 					<p:selectOneMenu id="tipo" value="#{produtoBean.produto.tipo}"
 						style="width:125px" required="true">
-						<f:selectItem itemLabel="Selecione um tipo" itemValue="" />
-						<f:selectItem itemLabel="Tipo 1" itemValue="tipo1" />
-						<f:selectItem itemLabel="Tipo 2" itemValue="tipo2" />
-						<f:selectItem itemLabel="Tipo 3" itemValue="tipo3" />
+						<f:selectItem itemLabel="#{msg['campo.sel.tipo']}" itemValue="" />
+						<f:selectItem itemLabel="#{msg['campo.tipo1']}" itemValue="tipo1" />
+						<f:selectItem itemLabel="#{msg['campo.tipo2']}" itemValue="tipo2" />
+						<f:selectItem itemLabel="#{msg['campo.tipo3']}" itemValue="tipo3" />
 					</p:selectOneMenu>
 
-					<p:commandButton value="Salvar"
+					<p:commandButton value="#{msg['botao.salvar']}"
 						action="#{produtoBean.salvaProduto()}"
 						update="@form :#{p:component('table')}" />
 
-					<p:commandButton value="Download" ajax="false" immediate="true"
+					<p:commandButton value="#{msg['botao.download']}" ajax="false" immediate="true"
 						icon="ui-icon-arrowthick-1-s">
 						<p:fileDownload value="#{produtoBean.downloadRelatorio()}" />
 					</p:commandButton>
@@ -52,19 +52,19 @@
 
 			<p:dataTable id="table" var="produto"
 				value="#{produtoBean.listarProdutos()}">
-				<p:column headerText="Id">
+				<p:column headerText="#{msg['campo.id']}">
 					<h:outputText value="#{produto.id}" />
 				</p:column>
 
-				<p:column headerText="Descrição">
+				<p:column headerText="#{msg['campo.descricao']}">
 					<h:outputText value="#{produto.descricao}" />
 				</p:column>
 
-				<p:column headerText="Tipo">
+				<p:column headerText="#{msg['campo.tipo']}">
 					<h:outputText value="#{produto.tipo}" />
 				</p:column>
 
-				<p:column headerText="Preço">
+				<p:column headerText="#{msg['campo.preco']}">
 					<h:outputText value="#{produto.preco}">
 						<f:convertNumber pattern="R$ #,##0.00" />
 					</h:outputText>
