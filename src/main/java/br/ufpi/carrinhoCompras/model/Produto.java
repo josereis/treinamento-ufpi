@@ -5,6 +5,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 import br.ufpi.carrinhoCompras.listeners.ProdutoListener;
 
@@ -16,6 +17,7 @@ public class Produto {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@Size(max=50, min=5)
 	private String descricao;
 	
 	private Double preco;

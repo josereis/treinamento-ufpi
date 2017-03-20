@@ -52,6 +52,22 @@ public class Compra {
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
+
+	public List<ItemCompra> getItensCompra() {
+		return itensCompra;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public void setItensCompra(List<ItemCompra> itensCompra) {
+		this.itensCompra = itensCompra;
+	}
 	
 	
 }

@@ -4,10 +4,8 @@
 package br.ufpi.carrinhoCompras.controller;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +72,6 @@ public class ProdutoBean {
 
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
-			String tmp = System.getProperty("java.io.tmpdir").concat(System.getProperty("file.separator"));
 			
 			FileInputStream fileInputStream = (FileInputStream) Thread.currentThread().getContextClassLoader()
 					.getResourceAsStream("RelatorioProdutos.jrxml");

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.ufpi.carrinhoCompras.model.Produto;
 
@@ -28,7 +28,7 @@ public class ProdutoDao implements Serializable{
 	}
 	
 	public List<Produto> listar(){
-		Query query = em.createQuery("Select p from Produto p", Produto.class);
+		TypedQuery<Produto> query = em.createQuery("Select p from Produto p", Produto.class);
 		return query.getResultList();
 	}
 }

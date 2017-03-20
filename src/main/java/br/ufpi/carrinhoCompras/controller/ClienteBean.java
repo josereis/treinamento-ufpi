@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import br.ufpi.carrinhoCompras.model.Cliente;
 import br.ufpi.carrinhoCompras.repository.ClienteDao;
@@ -29,7 +30,7 @@ public class ClienteBean implements Serializable {
 	private String senha;
 	private String cpf;
 	
-	
+
 	public ClienteBean() {
 	}
 
@@ -40,29 +41,51 @@ public class ClienteBean implements Serializable {
 
 	public void login() {
 		Cliente clienteBD = clienteDao.procurarClientePorEmailSenha(this.email, this.senha);
-		
-		if(clienteBD != null){
+
+		if (clienteBD != null) {
 			try {
 
 				Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-			
+
 				sessionMap.put("usuarioLogado", clienteBD);
-			
+
 				FacesContext.getCurrentInstance().getExternalContext().redirect("produto.xhtml");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problema ao fazer login!", "Email e/ou senha incorretos!"));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Problema ao fazer login!", "Email e/ou senha incorretos!"));
 		}
 	}
-	
-	public void salvar(){
+
+	public void salvar() {
 		String cpf = this.cpf.replaceAll("\\.", "").replaceAll("\\-", "");
 		cliente.setCpf(cpf);
-		
+
 		clienteDao.salvar(cliente);
+	}
+
+	public Cliente getUsuarioLogado() {
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+		return (Cliente) sessionMap.get("usuarioLogado");
+	}
+
+	public void logout() {
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.remove("usuarioLogado");
+
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		request.getSession().invalidate();
+
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Cliente getCliente() {
@@ -96,7 +119,5 @@ public class ClienteBean implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
-	
-	
+
 }

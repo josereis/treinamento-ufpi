@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Cliente {
@@ -16,10 +17,12 @@ public class Cliente {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	
 	private String nome;
 	
 	private String cpf;
 	
+	@Pattern(regexp="^[a-z0-9]+")
 	private String senha;
 	
 	private String email;

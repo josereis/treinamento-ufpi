@@ -7,10 +7,19 @@
 
 <h:head>
 
-<style>
-	.ui-layout-unit{
-		border: 0px;
-	}	
+	<style>
+.ui-layout-unit {
+	border: 0px;
+}
+
+.ui-layout-north{
+	z-index: 20 !important;
+	overflow: visible !important;
+}
+
+.ui-layout-north .ui-layout-unit-content{
+	overflow: visible;
+}
 </style>
 </h:head>
 
@@ -19,8 +28,20 @@
 <h:body>
 	<p:layout fullPage="true">
 
-		<p:layoutUnit position="north" size="100">
-			<h:outputText value="North unit content." />
+		<p:layoutUnit position="north" size="65">
+
+			<h:form>
+				<p:menubar>
+					<p:menuitem value="Produtos" url="produto.xhtml" />
+					<p:menuitem value="Clientes" url="cliente.xhtml" />
+					<p:menuitem value="Compras" url="compra.xhtml" />
+
+					<p:submenu label="#{clienteBean.usuarioLogado.email}" style=" float: right;" icon="ui-icon-person">
+						<p:menuitem value="Sair" action="#{clienteBean.logout()}"/>
+					</p:submenu>
+				</p:menubar>
+
+			</h:form>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
