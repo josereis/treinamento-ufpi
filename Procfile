@@ -1,1 +1,1 @@
-web: target/wildfly-8.2.0.Final/bin/ -Djboss.http.port=$PORT -b 0.0.0.0
+web: target/carrinho-compras-0.0.1-SNAPSHOT.war -Djboss.http.port=$PORT -b 0.0.0.0
